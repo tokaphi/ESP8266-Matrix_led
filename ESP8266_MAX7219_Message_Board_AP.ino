@@ -33,7 +33,7 @@ String message, webpage;
 // Vcc            -> 5v  
 // Gnd            -> Gnd 
 // DIN            -> D7  
-// CS             -> D4  
+// CS             -> D6  
 // CLK            -> D5  
 
 //################ PROGRAM SETTINGS ####################
