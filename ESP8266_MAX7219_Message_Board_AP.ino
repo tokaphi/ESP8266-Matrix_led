@@ -74,7 +74,7 @@ void setup() {
   wait    = 75;
   message = "matrixLed pour jeedom";
   display_message(message); // Display the message
-  wait    = 50;
+  wait    = 75;
   message = "bienvenue...";
 }
 
