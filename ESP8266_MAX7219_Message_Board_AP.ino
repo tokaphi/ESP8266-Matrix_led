@@ -71,7 +71,7 @@ void setup() {
   matrix.setRotation(6, 1); // The first display is position upside down
   matrix.setRotation(7, 1); // The first display is position upside down
   server.on("/", GetMessage);
-  wait    = 25;
+  wait    = 75;
   message = "matrixLed pour jeedom";
   display_message(message); // Display the message
   wait    = 50;
