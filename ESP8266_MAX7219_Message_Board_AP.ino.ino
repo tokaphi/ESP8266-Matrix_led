@@ -30,11 +30,11 @@ String message, webpage;
 
 //################# DISPLAY CONNECTIONS ################
 // LED Matrix Pin -> ESP8266 Pin
-// Vcc            -> 3v  (3V on NodeMCU 3V3 on WEMOS)
-// Gnd            -> Gnd (G on NodeMCU)
-// DIN            -> D7  (Same Pin for WEMOS)
-// CS             -> D4  (Same Pin for WEMOS)
-// CLK            -> D5  (Same Pin for WEMOS)
+// Vcc            -> 5v  
+// Gnd            -> Gnd 
+// DIN            -> D7  
+// CS             -> D4  
+// CLK            -> D5  
 
 //################ PROGRAM SETTINGS ####################
 String version = "v1.0";       // Version of this program
