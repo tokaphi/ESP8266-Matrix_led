@@ -29,7 +29,7 @@ char time_value[20];
 String message, webpage;
 
 //################# DISPLAY CONNECTIONS ################
-// LED Matrix Pin -> ESP8266 Pin
+// LED Matrix Pin -> esp8266 wemos-d1-mini Pin
 // Vcc            -> 5v  
 // Gnd            -> Gnd 
 // DIN            -> D7  
