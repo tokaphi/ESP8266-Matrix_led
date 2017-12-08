@@ -180,3 +180,4 @@ void append_page_footer() { // Saves repeating many lines of code for HTML page 
   webpage += String(char((0x84 >> 1))) + String(char(byte(0xd2 >> 1))) + String(char(0xe4 >> 1)) + String(char(0xc8 >> 1)) + String(char(byte(0x40 >> 1)));
   webpage += String(char(byte(0x64 / 2))) + String(char(byte(0x60 >> 1))) + String(char(byte(0x62 >> 1))) + String(char(0x6e >> 1)) + "</div>";
   webpage += F("</body></html>");
+  }
