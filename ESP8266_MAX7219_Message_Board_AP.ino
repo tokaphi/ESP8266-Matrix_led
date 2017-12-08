@@ -18,6 +18,7 @@
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Max72xxPanel.h>
+#include <time.h>
 
 const char *ssid     = "Message Board";
 const char *password = "";
@@ -62,6 +63,7 @@ void setup() {
 
   //----------------------------------------------------------------------
   server.begin(); Serial.println(F("Webserver started..."));
+  configTime(2 * 3600, 0, "pool.ntp.org", "time.nist.gov");
   matrix.setRotation(0, 1); // The first display is position upside down
   matrix.setRotation(1, 1); // The first display is position upside down
   matrix.setRotation(2, 1); // The first display is position upside down
@@ -78,8 +80,26 @@ void setup() {
   message = "bienvenue...";
 }
 
-void loop() {
+void loop() 
+{
   server.handleClient();
+  matrix.fillScreen(LOW);
+  time_t now = time(nullptr);
+  String time = String(ctime(&now));
+  time.trim();
+  time.substring(11,19).toCharArray(time_value, 10); 
+  matrix.setIntensity(7); // Use a value between 0 and 15 for brightness
+  matrix.drawChar(18,0,time_value[0],  HIGH,LOW,1); // H
+  matrix.drawChar(24,0,time_value[1], HIGH,LOW,1); // HH
+  matrix.drawChar(30,0,time_value[2], HIGH,LOW,1); // HH:
+  matrix.drawChar(36,0,time_value[3], HIGH,LOW,1); // HH:M
+  matrix.drawChar(42,0,time_value[4], HIGH,LOW,1); // HH:MM
+ //matrix.drawChar(38,0,time_value[5], HIGH,LOW,1); // HH:MM:
+ //matrix.drawChar(44,0,time_value[6], HIGH,LOW,1); // HH:MM:S
+ // matrix.drawChar(50,0,time_value[7], HIGH,LOW,1); // HH:MM:SS
+  
+  matrix.write(); // Send bitmap to display
+  delay(2000);
   display_message(message); // Display the message
 }
 
