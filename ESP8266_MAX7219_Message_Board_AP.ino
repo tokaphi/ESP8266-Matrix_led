@@ -80,8 +80,7 @@ void setup() {
   message = "bienvenue...";
 }
 
-void loop() 
-{
+void loop() {
   server.handleClient();
   matrix.fillScreen(LOW);
   time_t now = time(nullptr);
