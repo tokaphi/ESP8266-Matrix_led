@@ -63,7 +63,7 @@ void setup() {
 
   //----------------------------------------------------------------------
   server.begin(); Serial.println(F("Webserver started..."));
-  configTime(2 * 3600, 0, "pool.ntp.org", "time.nist.gov");
+  configTime(1 * 3600, 0, "pool.ntp.org", "time.nist.gov");
   matrix.setRotation(0, 1); // The first display is position upside down
   matrix.setRotation(1, 1); // The first display is position upside down
   matrix.setRotation(2, 1); // The first display is position upside down
@@ -123,18 +123,16 @@ void display_message(String message) {
 void GetMessage() {
   webpage = ""; // don't delete this command, it ensures the server works reliably!
   append_page_header();
-  String IPaddress = WiFi.softAPIP().toString();
-  webpage += F("<h3>Enter the message to be displayed then Enter</h3><br>");
-  webpage += "<form action=\"http://" + IPaddress + "\" method=\"POST\">";
-  webpage += F("Enter the required message text:<br><br><input type='text' size='50' name='message' value='' ");
-  webpage += F("</form><br/><br/>");
+  String IPaddress = WiFi.localIP().toString();
+  webpage += "<form action=\"http://"+IPaddress+"\" method='post'>";
+  webpage += "<P>Enter text for display: <INPUT type='text' size ='60' name='message' value='Enter message'></P></form><br>";
   append_page_footer();
   server.send(200, "text/html", webpage); // Send a response to the client to enter their inputs, if needed, Enter=defaults
   if (server.args() > 0 ) { // Arguments were received
-    for ( uint8_t i = 0; i < server.args(); i++ ) {
+    for ( uint8_t i = 0; i  <= server.args(); i++ ) {
       String Argument_Name   = server.argName(i);
       String client_response = server.arg(i);
-      if (Argument_Name == "message")    message = client_response;
+      if (Argument_Name == "message") message = client_response;
     }
   }
 }
@@ -182,4 +180,3 @@ void append_page_footer() { // Saves repeating many lines of code for HTML page 
   webpage += String(char((0x84 >> 1))) + String(char(byte(0xd2 >> 1))) + String(char(0xe4 >> 1)) + String(char(0xc8 >> 1)) + String(char(byte(0x40 >> 1)));
   webpage += String(char(byte(0x64 / 2))) + String(char(byte(0x60 >> 1))) + String(char(byte(0x62 >> 1))) + String(char(0x6e >> 1)) + "</div>";
   webpage += F("</body></html>");
-}
